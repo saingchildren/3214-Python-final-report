@@ -81,16 +81,6 @@ class Counter():
         self.prc.append(lr_auc)
         print("PRC_auc area=%.4f" %(lr_auc))
 
-    def change_data_form(self, y_test, pred):
-        df = pd.DataFrame({ "Pred": pred, "Real": y_test })
-        df["PredNew"] = 0
-        df.loc[df["Pred"] == 1, ["PredNew"]] = 1
-        df["RealNew"] = 0
-        df.loc[df["Real"] == 1, ["RealNew"]] = 1
-        c_y_test = df["RealNew"]
-        c_pred = df["PredNew"]
-        return c_y_test, c_pred
-
 def get_data():
     data = pd.read_csv("./mobile_train.csv")
     features = list(data.columns[:20])

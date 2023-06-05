@@ -1,6 +1,6 @@
 # before run python all.py
 
-> #### 1.要確保 score.xlsx 在資料夾內
+> #### 1.要確保 score.xlsx 在資料夾內, 並同時確保有score、roc、prc三個資料表
 
 > #### 2.每次要重新跑 all.py 時候必須確保 score.xlsx 內的三個資料表都為空
 
