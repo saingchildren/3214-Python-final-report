@@ -26,17 +26,5 @@ result = pd.concat([tree_result,
                     forest_result, 
                     dnn_result], axis=1)
 
-# print all CM
-print("---TREE FINAL CM---")
-print(tree_cm)
-print("---MLP FINAL CM---")
-print(mlp_cm)
-print("---KNN FINAL CM---")
-print(knn_cm)
-print("---FOREST FINAL CM---")
-print(forest_cm)
-print("---DNN FINAL CM---")
-print(dnn_cm)
-
 print("---COMPARE---")
 print(result)
