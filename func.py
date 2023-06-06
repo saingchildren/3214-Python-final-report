@@ -37,6 +37,11 @@ class Counter():
         self.total_cm += cm
 
     def get_total_cm(self):
+        cm = self.total_cm.to_numpy()
+        sheet = self.workbook["cm"]
+        for i in cm:
+            sheet.append(list(i))
+        self.workbook.save("score.xlsx")
         return self.total_cm
 
     def get_result(self, modelName):
