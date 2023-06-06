@@ -6,5 +6,5 @@
 
 # after run python all.py
 
-> #### score的score工作表的資料會是50列4行、以10列區分，分別是tree、mlp、knn、forest、dnn
+> #### score的score工作表的資料會是50列5行、以10列區分，分別是tree、mlp、knn、forest、dnn
 > #### roc、prc的資料表都為5列10行，分別是tree、mlp、knn、forest、dnn

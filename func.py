@@ -20,12 +20,17 @@ class Counter():
         FP = cf[0][1]
         FN = cf[1][0]
         TN = cf[1][1]
+        # 陽性的樣本中有幾個是預測正確的
         precision = TP / (TP + FP)
+        # 事實為真的樣本中有幾個是預測正確的
         tpr = TP / (TP + FN)
+        # 正確的機率
         accuracy = (TP + TN) / (TP + FP + FN + TN)
+        # 同時考慮Precision和Recall的指標
         f1_score = (2 * tpr * precision) / (tpr + precision)
         sheet = self.workbook["score"]
         sheet.append([accuracy, tpr, precision, f1_score])
+        # 插入至資料表
         self.workbook.save("score.xlsx")
         print(pd.DataFrame([accuracy, tpr, precision, f1_score]).T)
         self.score["precision"] += precision
@@ -41,6 +46,7 @@ class Counter():
 
     def get_result(self, modelName):
         result = (pd.DataFrame([self.score]).T[0] / 10).rename(modelName)
+        # 插入至資料表
         sheet_roc = self.workbook["roc"]
         sheet_roc.append(self.roc)
         sheet_roc.append([])
@@ -51,6 +57,7 @@ class Counter():
         return result
 
     def draw_roc(self, modelName, count, fpr, tpr, roc_auc):
+        # roc圖表
         plt.figure()
         lw = 2
         plt.plot(fpr, tpr, color = "darkorange")
@@ -68,6 +75,7 @@ class Counter():
         print("ROC_auc area=%.4f" %(roc_auc))
 
     def draw_prc(self, modelName, count, lr_recall, lr_precision, lr_auc):
+        # prc圖表
         plt.plot([0,1],[1,0],color='navy',lw=2,linestyle='--')
         plt.plot(lr_recall,lr_precision,color="darkorange", lw=2,label='PRC curve (area = %0.4f)'%lr_auc)
         plt.xlim([0.0,1.0])
@@ -85,7 +93,9 @@ def get_data():
     data = pd.read_csv("./mobile_train.csv")
     features = list(data.columns[:20])
 
+    # 前20行的特徵值
     X = data[features].to_numpy()
+    # 最後一行是標籤
     y = data["price_range"].to_numpy()
 
     return X, y
